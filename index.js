@@ -1,10 +1,14 @@
 
 require('dotenv').config()
 const express = require('express');
+const path = require('path');
 
 const cors = require('cors');
 
+
 const app = express();
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 const mongoose = require('mongoose');
@@ -24,7 +28,9 @@ app.use(express.json());
 const coursesRouter = require('./routes/courses.route');
 const usersRouter = require('./routes/users.route');
 
+
 app.use('/api/courses', coursesRouter) // /api/courses
+
 app.use('/api/users', usersRouter) // /api/users
 
 // global middleware for not found router
